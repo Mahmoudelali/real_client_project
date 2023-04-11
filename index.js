@@ -1,12 +1,12 @@
-import express from 'express';
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import connectToDatabase from "./dataBase/dataBase.js";
+
 const app = express();
 
-import dotenv from 'dotenv';
-
-import cors from 'cors';
 dotenv.config();
 
-import connectToDatabase from './dataBase/dataBase.js';
 connectToDatabase();
 
 app.use(express.json());

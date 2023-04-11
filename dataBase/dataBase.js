@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
-mongoose.set('strictQuery', true);
-import dotenv from 'dotenv';
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+mongoose.set("strictQuery", true);
 dotenv.config();
 
 const connectToDatabase = async () => {
