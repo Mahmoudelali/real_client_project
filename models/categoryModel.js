@@ -9,7 +9,7 @@ const categorySchema= new Schema(
         },
     },
     {
-        collation: "Category",
+        collection:"Category",
     }
 );
 

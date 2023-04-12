@@ -6,6 +6,10 @@ const SubCategorySchema =new Schema(
             type:String,
             require:true,
         },
+        category_id:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"Category",
+        },
     },
     {
         collection:"SubCategory",
