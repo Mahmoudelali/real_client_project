@@ -32,6 +32,10 @@ const orderSchema = new Schema({
         type: Number,
         required: true
       }
-    });
+    },  {
+        timestamps: true,
+        collection: "Order",
+    }
+    );
   const orderModel = model('Order', orderSchema);
   export default orderModel;
