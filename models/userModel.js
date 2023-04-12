@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
+import parsePhoneNumberFromString from "libphonenumber-js";
+
 const { Schema, model } = mongoose;
 
 let validateEmail = function (email) {
@@ -19,6 +21,14 @@ const userSchema = new Schema(
             required: "phone number is required",
             trim: true,
             unique: true,
+            validate: {
+                validator: function (v) {
+                    const phoneNumber = parsePhoneNumberFromString(v, this.countryCode);
+                    return phoneNumber && phoneNumber.isValid();
+                },
+                message: (props) =>
+                    `${props.value} is not a valid phone number for ${this.countryCode}`,
+            },
         },
         country_code: {
             type: String,
