@@ -9,5 +9,4 @@ export async function getAll(req, res, next) {
     } catch (err) {
         return next(err);
     }
-
 }
