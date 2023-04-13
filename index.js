@@ -7,7 +7,9 @@ import connectToDatabase from "./dataBase/dataBase.js";
 import userRouter from "./routes/userRouter.js";
 import orderRouter from "./routes/orderRouter.js";
 import social_mediaRouter from "./routes/social_mediaRouter.js"
-import profitRouter from "./routes/profitRouter.js"
+import profitRouter from "./routes/profitRouter.js";
+import categoryRouter from "./routes/categoryRouter.js";
+import subCategoryRouter from "./routes/sub_categoryRouter.js";
 
 dotenv.config();
 
@@ -41,3 +43,6 @@ app.use("/user", userRouter);
 app.use("/order", orderRouter);
 app.use("/socialmedia", social_mediaRouter);
 app.use("/profit", profitRouter)
+
+app.use("/category", categoryRouter);
+app.use("/subcategory", subCategoryRouter);
