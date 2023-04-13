@@ -7,6 +7,7 @@ import connectToDatabase from "./dataBase/dataBase.js";
 import userRouter from "./routes/userRouter.js";
 import orderRouter from "./routes/orderRouter.js";
 import categoryRouter from "./routes/categoryRouter.js";
+import subCategoryRouter from "./routes/sub_categoryRouter.js";
 
 dotenv.config();
 
@@ -40,4 +41,5 @@ app.listen(
 
 app.use("/user", userRouter);
 app.use("/order", orderRouter);
-app.use("/category", categoryRouter)
+app.use("/category", categoryRouter);
+app.use("/subcategory", subCategoryRouter);

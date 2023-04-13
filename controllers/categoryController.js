@@ -69,11 +69,5 @@ export const deleteCategory = async (req, res)=>{
 };
 
 
-  const CategoryController= {
-    getAllCategory,
-    addCategory,
-    getCategoryById,
-    updateCategoById,
-    deleteCategory
-  };
+
 
