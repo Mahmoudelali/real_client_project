@@ -7,7 +7,7 @@ const SubCategorySchema =new Schema(
             require:true,
         },
         category_id:{
-            type:mongoose.Schema.Types.ObjectId,
+            type:Schema.Types.ObjectId,
             ref:"Category",
         },
     },
