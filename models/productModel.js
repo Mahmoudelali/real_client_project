@@ -1,9 +1,9 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Schema } from "mongoose";
 
 const ProductSchema = new Schema({
 	userId: {
 		type: Schema.Types.ObjectId,
-		ref: 'User',
+		ref: "User",
 	},
 	title: {
 		type: string,
@@ -40,8 +40,8 @@ const ProductSchema = new Schema({
 	},
 	sub_category_id: {
 		type: Schema.Types.ObjectId,
-		ref: 'SubCategory',
+		ref: "SubCategory",
 	},
 });
 
-export default mongoose.model('Product', ProductSchema);
+export default mongoose.model("Product", ProductSchema);
