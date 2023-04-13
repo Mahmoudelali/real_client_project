@@ -5,7 +5,8 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import connectToDatabase from "./dataBase/dataBase.js";
 import userRouter from "./routes/userRouter.js";
-import orderRouter from "./routes/orderRouter.js"
+import orderRouter from "./routes/orderRouter.js";
+import categoryRouter from "./routes/categoryRouter.js";
 
 dotenv.config();
 
@@ -39,3 +40,4 @@ app.listen(
 
 app.use("/user", userRouter);
 app.use("/order", orderRouter);
+app.use("/category", categoryRouter)

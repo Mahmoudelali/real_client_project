@@ -1,4 +1,4 @@
-import Category from "../models/categoryModel";
+import Category from "../models/categoryModel.js";
 
 // To get all the category 
 export const getAllCategory = async (req, res)=>{
@@ -54,4 +54,26 @@ export const updateCategoById = async (req, res)=>{
         res.status(500).json({message: error.message});
     }
 }
+
+// delete category by Id 
+export const deleteCategory = async (req, res)=>{
+    try{
+        const category = await Category.findByIdAndRemove(req.params.categoryId);
+        if(!category){
+           return res.status(404).json({message:"Category Not Found"});
+        }
+        res.status(200).json({ message: "Category Deleted Successfully" });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+};
+
+
+  const CategoryController= {
+    getAllCategory,
+    addCategory,
+    getCategoryById,
+    updateCategoById,
+    deleteCategory
+  };
 
