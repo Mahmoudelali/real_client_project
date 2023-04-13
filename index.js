@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import connectToDatabase from "./dataBase/dataBase.js";
 import userRouter from "./routes/userRouter.js";
-import orderRouter from "./routes/orderRouter.js"
+import orderRouter from "./routes/orderRouter.js";
 
 dotenv.config();
 
@@ -27,15 +27,13 @@ app.use(cookieParser());
 
 app.use(express.urlencoded({ extended: false }));
 
-app.get("/", (req, res) => {
-	res.send("API is running...");
-});
-
-
 app.listen(
 	PORT,
 	console.log(`Server is running in ${process.env.NODE_ENV} on port ${PORT}!!!`)
 );
 
+app.get("/", (req, res) => {
+	res.send("API is running...");
+});
 app.use("/user", userRouter);
 app.use("/order", orderRouter);
