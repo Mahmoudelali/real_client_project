@@ -3,18 +3,16 @@ const { Schema, model } = mongoose;
 
 const orderSchema = new Schema(
   {
-    user_id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
-    product_id: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Product",
-        required: true,
-      },
-    ],
+    // user_id: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "User",
+    // },
+    // product_id: [
+    //   {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Product",
+    //   },
+    // ],
     state: {
       type: String,
       enum: [
@@ -46,8 +44,8 @@ const orderSchema = new Schema(
     collection: "Order",
   }
 );
-orderSchema.pre(["find", "findOne", "save", "create"], function () {
-  this.populate(["user_id", "product_id"]);
-});
+// orderSchema.pre(["find", "findOne", "save", "create"], function () {
+//   this.populate(["user_id", "product_id"]);
+// });
 const orderModel = model("Order", orderSchema);
 export default orderModel;
