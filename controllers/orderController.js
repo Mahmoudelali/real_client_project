@@ -1,6 +1,6 @@
-import Order from '../models/orderModel.js';
+import Order from "../models/orderModel.js";
 
-// GET /api/orders
+// GET /orders
 export const getAllOrders = async (req, res) => {
   try {
     const orders = await Order.find();
@@ -10,17 +10,17 @@ export const getAllOrders = async (req, res) => {
   }
 };
 
-// POST /api/orders
+// POST /orders
 export const createOrder = async (req, res) => {
-  const { user_id, product_id, state, date, address, message, total } = req.body;
+  const { user_id, product_id, state,address, message, total } =
+    req.body;
   const order = new Order({
     user_id,
     product_id,
     state,
-    date,
     address,
     message,
-    total
+    total,
   });
 
   try {
@@ -31,12 +31,12 @@ export const createOrder = async (req, res) => {
   }
 };
 
-// GET /api/orders/:orderId
+// GET /orders/:orderId
 export const getOrderById = async (req, res) => {
   try {
     const order = await Order.findById(req.params.orderId);
     if (!order) {
-      return res.status(404).json({ message: 'Order not found' });
+      return res.status(404).json({ message: "Order not found" });
     }
     res.status(200).json(order);
   } catch (error) {
@@ -44,18 +44,17 @@ export const getOrderById = async (req, res) => {
   }
 };
 
-// PUT /api/orders/:orderId
+// PUT /orders/:orderId
 export const updateOrder = async (req, res) => {
   try {
     const order = await Order.findById(req.params.orderId);
     if (!order) {
-      return res.status(404).json({ message: 'Order not found' });
+      return res.status(404).json({ message: "Order not found" });
     }
 
     order.user_id = req.body.user_id || order.user_id;
     order.product_id = req.body.product_id || order.product_id;
     order.state = req.body.state || order.state;
-    order.date = req.body.date || order.date;
     order.address = req.body.address || order.address;
     order.message = req.body.message || order.message;
     order.total = req.body.total || order.total;
@@ -67,15 +66,15 @@ export const updateOrder = async (req, res) => {
   }
 };
 
-// DELETE /api/orders/:orderId
+// DELETE /orders/:orderId
 export const deleteOrder = async (req, res) => {
   try {
     const order = await Order.findById(req.params.orderId);
     if (!order) {
-      return res.status(404).json({ message: 'Order not found' });
+      return res.status(404).json({ message: "Order not found" });
     }
     await order.remove();
-    res.status(200).json({ message: 'Order deleted successfully' });
+    res.status(200).json({ message: "Order deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
