@@ -25,5 +25,33 @@ export const addCategory = async(req, res)=>{
 };
 
 
+// to get category by ID
 
+export const getCategoryById = async (req, res)=>{
+    try{
+        const category= await Category.findById(req.params.categoryId);
+        if(!category){
+            return res.status(404).json({message: 'Category Not Found'});
+        }
+        res.status(200).json(category);
+    } catch{
+        res.status(500).json({message:error.message});
+    }
+};
+
+// to edit category by Id 
+
+export const updateCategoById = async (req, res)=>{
+    try{
+        const category = await Category.findById(req.params.categoryId);
+        if (!category){
+            return res.status(404).json({message:"Category Not Found"});
+        }
+        category.name= req.body.name || category.name;
+        const updated = await category.save();
+        res.status(200).json(updated);
+    } catch{
+        res.status(500).json({message: error.message});
+    }
+}
 
