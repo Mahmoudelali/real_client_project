@@ -9,19 +9,19 @@ import {
 
 const router = express.Router();
 
-// GET /orders
+// GET /socialmedia
 router.get("/", getAllSocialMedia);
 
-// POST /orders
+// POST /socialmedia
 router.post("/", createSocialMedia);
 
-// GET /orders/:orderId
+// GET /socialmedia/:socialMediaId
 router.get("/:socialMediaId", getSocialMediaById);
 
-// PUT /orders/:orderId
+// PUT /socialmedia/:socialMediaId
 router.put("/:socialMediaId", updateSocialMedia);
 
-// DELETE /orders/:orderId
+// DELETE /socialmedia/:socialMediaId
 router.delete("/:socialMediaId", deleteSocialMedia);
 
 export default router;
