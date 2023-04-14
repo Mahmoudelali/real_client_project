@@ -1,17 +1,10 @@
-
 import { Schema, model } from 'mongoose';
-
-
 
 const ProductSchema = new Schema({
 	userId: {
 		type: Schema.Types.ObjectId,
-
-
 		ref: 'User',
 		required: true,
-
-
 	},
 	title: {
 		type: String,
@@ -24,23 +17,18 @@ const ProductSchema = new Schema({
 	images: [
 		{
 			typeof: Object,
-			required: true,
 		},
 	],
 	price: {
 		type: Number,
-		required: true,
 	},
 	condition: {
 		type: String,
-		required: true,
 	},
 	state: {
 		type: String,
-		required: true,
 	},
 	is_available: {
-		required: true,
 		type: Boolean,
 	},
 	review: {

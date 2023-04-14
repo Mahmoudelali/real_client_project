@@ -4,31 +4,7 @@ class product_controllers {
 	// add product
 	addProduct(req, res) {
 		try {
-			const {
-				userId,
-				title,
-				description,
-				images,
-				price,
-				condition,
-				state,
-				is_available,
-				review,
-				sub_category_id,
-			} = req.body;
-
-			ProductModel.create(
-				userId,
-				title,
-				description,
-				images,
-				price,
-				condition,
-				state,
-				is_available,
-				review,
-				sub_category_id,
-			).then((product) => {
+			ProductModel.create(req.body).then((product) => {
 				console.log(product);
 				res.status(200).json({
 					message: 'Product added successfully',

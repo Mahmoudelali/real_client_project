@@ -8,7 +8,7 @@ import productController from '../controllers/productController.js';
 // get All products
 router.get('/', productController.getAllProducts);
 // get One Product
-router.get('/:id', productController.getOneProduct);
+router.get('/:id', productController.getSingleProduct);
 // Add one product
 router.post('/create', imageHandler, productController.addProduct);
 // edit one product
