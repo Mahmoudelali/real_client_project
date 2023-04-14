@@ -1,23 +1,24 @@
 
-import mongoose, { Schema, model } from 'mongoose';
+import { Schema, model } from 'mongoose';
 
-import mongoose, { Schema } from "mongoose";
 
 
 const ProductSchema = new Schema({
 	userId: {
 		type: Schema.Types.ObjectId,
 
+
 		ref: 'User',
 		required: true,
 
+
 	},
 	title: {
-		type: string,
+		type: String,
 		required: true,
 	},
 	description: {
-		type: string,
+		type: String,
 		required: true,
 	},
 	images: [
@@ -48,8 +49,8 @@ const ProductSchema = new Schema({
 	},
 	sub_category_id: {
 		type: Schema.Types.ObjectId,
-		ref: "SubCategory",
+		ref: 'SubCategory',
 	},
 });
 
-export default mongoose.model("Product", ProductSchema);
+export default model('Product', ProductSchema);
