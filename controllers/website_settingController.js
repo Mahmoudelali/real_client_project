@@ -1,4 +1,4 @@
-import WebsiteSetting from "../models/website_settingModel.js"
+import WebsiteSetting from "../models/website_settingModel.js";
 
 // Get all website setting
 export const getAllWebsiteSetting = async (req, res) => {
@@ -25,11 +25,13 @@ export const createWebsiteSetting = async (req, res) => {
 // Get a single website setting by ID
 export const getWebsiteSettingById = async (req, res) => {
   try {
-    const websiteSetting = await WebsiteSetting.findById(req.params.websiteSettingId);
-    if (!websiteSetting ) {
+    const websiteSetting = await WebsiteSetting.findById(
+      req.params.websiteSettingId
+    );
+    if (!websiteSetting) {
       return res.status(404).json({ message: "Website setting not found" });
     }
-    res.status(200).json(websiteSetting );
+    res.status(200).json(websiteSetting);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -38,8 +40,10 @@ export const getWebsiteSettingById = async (req, res) => {
 // Update a website setting
 export const updateWebsiteSetting = async (req, res) => {
   try {
-    const websiteSetting = await WebsiteSetting.findById(req.params. websiteSettingId);
-    if (! websiteSetting) {
+    const websiteSetting = await WebsiteSetting.findById(
+      req.params.websiteSettingId
+    );
+    if (!websiteSetting) {
       return res.status(404).json({ message: "Social media entry not found" });
     }
     Object.assign(websiteSetting, req.body);
@@ -51,7 +55,7 @@ export const updateWebsiteSetting = async (req, res) => {
 };
 
 // Delete a website setting
-export const deleteWebsiteSetting= async (req, res) => {
+export const deleteWebsiteSetting = async (req, res) => {
   try {
     const websiteSetting = await WebsiteSetting.findByIdAndRemove(
       req.params.websiteSettingId
@@ -59,9 +63,7 @@ export const deleteWebsiteSetting= async (req, res) => {
     if (!websiteSetting) {
       return res.status(404).json({ message: "Website setting not found" });
     }
-    res
-      .status(200)
-      .json({ message: "Website setting deleted successfully" });
+    res.status(200).json({ message: "Website setting deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

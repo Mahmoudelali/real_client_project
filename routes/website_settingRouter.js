@@ -5,7 +5,7 @@ import {
   getWebsiteSettingById,
   updateWebsiteSetting,
   deleteWebsiteSetting,
-} from "../controllers/website_settingController.js"
+} from "../controllers/website_settingController.js";
 
 const router = express.Router();
 
