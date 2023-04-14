@@ -12,7 +12,6 @@ export const getAllOrders = async (req, res) => {
 
 // create a new order
 export const createOrder = async (req, res) => {
-  sssssssssssssssssssss;
   const { user_id, product_id, state, address, message, total } = req.body;
   const order = new Order({
     user_id,
