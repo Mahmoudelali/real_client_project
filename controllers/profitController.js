@@ -1,4 +1,4 @@
-import Profit from "../models/profitModel.js"
+import Profit from "../models/profitModel.js";
 
 // Get all profits
 export const getAllProfit = async (req, res) => {
@@ -53,15 +53,11 @@ export const updateProfit = async (req, res) => {
 // Delete a profit
 export const deleteProfit = async (req, res) => {
   try {
-    const profit = await Profit.findByIdAndRemove(
-      req.params.profitId
-    );
+    const profit = await Profit.findByIdAndRemove(req.params.profitId);
     if (!profit) {
       return res.status(404).json({ message: "Profit not found" });
     }
-    res
-      .status(200)
-      .json({ message: "Profit deleted successfully" });
+    res.status(200).json({ message: "Profit deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

@@ -1,10 +1,10 @@
-import express from "express"
-import{
-    getAllsubCategory,
-    addsubCategory,
-    getsubCategoryById,
-    updatesubCategoById,
-    deletesubCategory
+import express from "express";
+import {
+  getAllsubCategory,
+  addsubCategory,
+  getsubCategoryById,
+  updatesubCategoById,
+  deletesubCategory,
 } from "../controllers/sub_categoryController.js";
 
 const router = express.Router();
@@ -15,10 +15,10 @@ router.get("/", getAllsubCategory);
 // add subcategory
 router.post("/", addsubCategory);
 
-// get subcategory by id 
+// get subcategory by id
 router.get("/:subcategoryId", getsubCategoryById);
 
-// update subcategory by id 
+// update subcategory by id
 router.put("/:subcategoryId", updatesubCategoById);
 
 //delete subcategory

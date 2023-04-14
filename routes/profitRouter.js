@@ -5,7 +5,7 @@ import {
   getProfitById,
   updateProfit,
   deleteProfit,
-} from "../controllers/profitController.js"
+} from "../controllers/profitController.js";
 
 const router = express.Router();
 
