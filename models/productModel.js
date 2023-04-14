@@ -1,9 +1,17 @@
+
 import { Schema, model } from 'mongoose';
+
+
 
 const ProductSchema = new Schema({
 	userId: {
 		type: Schema.Types.ObjectId,
+
+
 		ref: 'User',
+		required: true,
+
+
 	},
 	title: {
 		type: String,
@@ -13,7 +21,7 @@ const ProductSchema = new Schema({
 		type: String,
 		required: true,
 	},
-	image: [
+	images: [
 		{
 			typeof: Object,
 			required: true,
@@ -37,6 +45,7 @@ const ProductSchema = new Schema({
 	},
 	review: {
 		type: String,
+		default: '',
 	},
 	sub_category_id: {
 		type: Schema.Types.ObjectId,
