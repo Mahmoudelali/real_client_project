@@ -1,5 +1,6 @@
 import multer from "multer";
 
+// naming the image and saving its name to the database and the image to the uploads folder
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, "uploads");

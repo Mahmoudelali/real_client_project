@@ -1,14 +1,15 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-import parsePhoneNumberFromString from "libphonenumber-js";
 
 const { Schema, model } = mongoose;
 
+// validating the Email
 let validateEmail = function (email) {
     let re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     return re.test(email);
 };
 
+// user model
 const userSchema = new Schema(
     {
         username: {
@@ -18,27 +19,24 @@ const userSchema = new Schema(
         },
         phone: {
             type: String,
-            required: "phone number is required",
             trim: true,
             unique: true,
-            validate: {
-                validator: function (v) {
-                    const phoneNumber = parsePhoneNumberFromString(v, this.countryCode);
-                    return phoneNumber && phoneNumber.isValid();
-                },
-                message: (props) =>
-                    `${props.value} is not a valid phone number for ${this.countryCode}`,
-            },
+            sparse: true,
         },
-        country_code: {
+        country: {
             type: String,
-            required: "country code is required",
+            trim: true,
+        },
+        countryCallingCode: {
+            type: Number,
+            trim: true,
         },
         email: {
             type: String,
             trim: true,
             lowercase: true,
             unique: true,
+            sparse: true,
             validate: [validateEmail, "Please fill a valid email address"],
             match: [
                 /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
@@ -65,6 +63,7 @@ const userSchema = new Schema(
     }
 );
 
+// hashing the password
 userSchema.pre("save", function (next) {
     bcrypt
         .genSalt(10)
