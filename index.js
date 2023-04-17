@@ -12,6 +12,7 @@ import categoryRouter from "./routes/categoryRouter.js";
 import subCategoryRouter from "./routes/sub_categoryRouter.js";
 import productRouter from "./routes/productRouter.js";
 import websiteSettingRouter from "./routes/website_settingRouter.js";
+import instructionRouter from "./routes/instructionRouter.js";
 
 dotenv.config();
 
@@ -49,3 +50,4 @@ app.use("/profit", profitRouter);
 app.use("/websitesetting", websiteSettingRouter);
 app.use("/category", categoryRouter);
 app.use("/subcategory", subCategoryRouter);
+app.use("/instruction", instructionRouter)
