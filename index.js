@@ -34,6 +34,8 @@ app.use(cookieParser());
 
 app.use(express.urlencoded({ extended: false }));
 
+app.use("/uploads", express.static("uploads"));
+
 app.listen(
 	PORT,
 	console.log(`Server is running in ${process.env.NODE_ENV} on port ${PORT}!!!`)
@@ -50,4 +52,4 @@ app.use("/profit", profitRouter);
 app.use("/websitesetting", websiteSettingRouter);
 app.use("/category", categoryRouter);
 app.use("/subcategory", subCategoryRouter);
-app.use("/instruction", instructionRouter)
+app.use("/instruction", instructionRouter);

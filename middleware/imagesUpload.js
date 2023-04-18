@@ -1,17 +1,31 @@
 import multer from "multer";
 
-// naming the image and saving its name to the database and the image to the uploads folder
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
+const imageStorage = multer.diskStorage({
+    destination: function (req, file, cb) {
         cb(null, "uploads");
     },
-    filename: (req, file, cb) => {
+    filename: function (req, file, cb) {
         cb(
             null,
             file.fieldname + "-" + Date.now() + "." + file.mimetype.split("/")[1]
         );
     },
 });
-const upload = multer({ storage }).single("image");
+
+const upload = multer({
+    storage: imageStorage,
+    fileFilter: function (req, file, callback) {
+        if (
+            file.mimetype == "image/png" ||
+            file.mimetype == "image/jpg" ||
+            file.mimetype == "image/jpeg"
+        ) {
+            callback(null, true);
+        } else {
+            console.log("only jpg & png file supported");
+            callback(null, false);
+        }
+    },
+}).single("image");
 
 export default upload;

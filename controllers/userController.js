@@ -1,11 +1,17 @@
 import Model from "../models/userModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import fs from "fs";
 
 // get all users and admins and super admin
 export async function getAll(req, res, next) {
     try {
-        await Model.find({})
+        const { page, limit } = req.query;
+        const options = {
+            page: parseInt(page, 10) || 1,
+            limit: parseInt(limit, 10) || 10,
+        };
+        await Model.paginate({}, options)
             .then((response) => res.status(200).json({ success: true, response }))
             .catch((err) => res.status(404).json({ success: false, err }));
     } catch (err) {
@@ -16,7 +22,12 @@ export async function getAll(req, res, next) {
 // get all users
 export async function getUsers(req, res, next) {
     try {
-        await Model.find({ role: "user" })
+        const { page, limit } = req.query;
+        const options = {
+            page: parseInt(page, 10) || 1,
+            limit: parseInt(limit, 10) || 10,
+        };
+        await Model.paginate({ role: "user" }, options)
             .then((response) => res.status(200).json({ success: true, response }))
             .catch((err) => res.status(404).json({ success: false, err }));
     } catch (err) {
@@ -28,8 +39,14 @@ export async function getUsers(req, res, next) {
 export async function get(req, res, next) {
     try {
         let { id } = req.params;
-        await Model.find({ _id: id })
-            .then((response) => res.status(200).json({ success: true, response }))
+        await Model.findOne({ _id: id })
+            .then((response) =>
+                res.status(200).json({
+                    success: true,
+                    response,
+                    imagePath: `http://localhost:${process.env.PORT}/${response.image}`,
+                })
+            )
             .catch((err) =>
                 res.status(404).json({ success: false, message: "user not found", err })
             );
@@ -49,11 +66,15 @@ export async function register(req, res, next) {
             });
         }
         req.body.role = "user";
+
         let doc = new Model(req.body);
         if (!(username && password)) {
             return res
                 .status(400)
                 .json({ success: false, message: "All inputs are required" });
+        }
+        if (req.file) {
+            doc.image = req.file.path;
         }
         await Model.create(doc)
             .then((response) => {
@@ -64,7 +85,7 @@ export async function register(req, res, next) {
                         { expiresIn: "5h" }
                     );
                     response.password = undefined;
-
+                    res.cookie("auth_token", token, { maxAge: 5 * 60 * 60 * 1000 });
                     res.status(200).json({ success: true, response, token });
                 }
             })
@@ -99,6 +120,9 @@ export async function addAdmin(req, res, next) {
                 .status(400)
                 .json({ success: false, message: "All inputs are required" });
         }
+        if (req.file) {
+            doc.image = req.file.path;
+        }
         await Model.create(doc)
             .then((response) => {
                 if (response) {
@@ -108,6 +132,7 @@ export async function addAdmin(req, res, next) {
                         { expiresIn: "5h" }
                     );
                     response.password = undefined;
+                    res.cookie("auth_token", token, { maxAge: 5 * 60 * 60 * 1000 });
                     res.status(200).json({ success: true, response, token });
                 }
             })
@@ -142,6 +167,9 @@ export async function addSuperAdmin(req, res, next) {
                 .status(400)
                 .json({ success: false, message: "All inputs are required" });
         }
+        if (req.file) {
+            doc.image = req.file.path;
+        }
         await Model.create(doc)
             .then((response) => {
                 if (response) {
@@ -151,6 +179,7 @@ export async function addSuperAdmin(req, res, next) {
                         { expiresIn: "5h" }
                     );
                     response.password = undefined;
+                    res.cookie("auth_token", token, { maxAge: 5 * 60 * 60 * 1000 });
                     res.status(200).json({ success: true, response, token });
                 }
             })
@@ -219,13 +248,17 @@ export async function del(req, res, next) {
     try {
         let { id } = req.params;
         await Model.findByIdAndDelete({ _id: id })
-            .then((response) =>
+            .then((response) => {
+                fs.unlink(response.image, (err) => {
+                    if (err) return next(err);
+                    console.log("Image deleted successfully");
+                });
                 res.status(200).json({
                     success: true,
                     response,
                     message: "User deleted successfully",
-                })
-            )
+                });
+            })
             .catch((err) =>
                 res.status(404).json({ success: false, message: "user not found", err })
             );
