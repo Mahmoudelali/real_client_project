@@ -2,7 +2,8 @@ import jwt from "jsonwebtoken";
 
 // verify if the token of the user is valid
 export function verifyUser(req, res, next) {
-    let token = req.headers["auth_token"];
+    // let token = req.headers["auth_token"];
+    let token = req.cookie["auth_token"];
 
     if (!token) {
         return res.status(403).send("Login Please!");
