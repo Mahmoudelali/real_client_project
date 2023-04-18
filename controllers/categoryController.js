@@ -3,9 +3,14 @@ import Category from "../models/categoryModel.js";
 // To get all the category
 export const getAllCategory = async (req, res) => {
   try {
-    const category = new Category.find();
-    res.status(200).json({ message: error.message });
-  } catch {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+    const count = await Category.countDocuments();
+    const totalPages = Math.ceil(count / limit);
+    const categories = await Category.find().skip(skip).limit(limit);
+    res.status(200).json({ categories, totalPages, currentPage: page });
+    } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };

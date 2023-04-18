@@ -4,8 +4,15 @@ import subCategory from "../models/sub_categoryModel.js";
 
 export const getAllsubCategory = async (req, res) => {
   try {
-    const subcategories = await subCategory.find();
-    res.status(200).json(subcategories);
+    const page = parseInt(req.query.page) || 1 ;
+    const limit = parseInt (req.query.limit) || 10;
+    const skip = (page-1)* limit;
+
+    const count = await subCategory.countDocuments();
+    const totalPages = Math.ceil(count / limit);
+
+    const subcategories=  await subCategory.find().skip(skip).limit(limit);
+    res.status(200).json({subcategories, totalPages, currentPage: page});
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
