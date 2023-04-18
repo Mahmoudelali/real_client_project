@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
+import mongoosePaginate from "mongoose-paginate-v2";
 
 const { Schema, model } = mongoose;
 
@@ -76,6 +77,9 @@ userSchema.pre("save", function (next) {
             next(err);
         });
 });
+
+// adding the pagination plugin
+userSchema.plugin(mongoosePaginate);
 
 const User = model("User", userSchema);
 export default User;

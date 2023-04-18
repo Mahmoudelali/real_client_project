@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 // verify if the token of the user is valid
 export function verifyUser(req, res, next) {
     // let token = req.headers["auth_token"];
-    let token = req.cookie["auth_token"];
+    let token = req.cookies["auth_token"];
 
     if (!token) {
         return res.status(403).send("Login Please!");
@@ -19,7 +19,8 @@ export function verifyUser(req, res, next) {
 
 // verify if the user is an admin
 export function admin(req, res, next) {
-    if (req.user.role === "admin") return next();
+    if (req.user.role === "admin" || req.user.role === "superAdmin")
+        return next();
     else return res.status(401).send("Not Authorized");
 }
 
