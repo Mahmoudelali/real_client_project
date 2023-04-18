@@ -3,8 +3,13 @@ import Instruction from "../models/instructionModel.js"
 // Get all instructions
 export const getAllInstruction = async (req, res) => {
   try {
-    const instruction = await Instruction.find();
-    res.status(200).json(instruction);
+    const { page, limit } = req.query;
+    const options = {
+        page: parseInt(page, 10) || 1,
+        limit: parseInt(limit, 10) || 10,
+    };
+    const instructions = await Instruction.paginate({}, options);
+    res.status(200).json(instructions);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
