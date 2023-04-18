@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 const { Schema, model } = mongoose;
 
 const orderSchema = new Schema(
@@ -44,8 +45,11 @@ const orderSchema = new Schema(
     collection: "Order",
   }
 );
+orderSchema.plugin(mongoosePaginate);
+
 // orderSchema.pre(["find", "findOne", "save", "create"], function () {
 //   this.populate(["user_id", "product_id"]);
 // });
 const orderModel = model("Order", orderSchema);
+orderModel.paginate().then({});
 export default orderModel;

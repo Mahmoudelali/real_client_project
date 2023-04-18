@@ -3,7 +3,12 @@ import SocialMedia from "../models/social_mediaModel.js";
 // Get all social media entries
 export const getAllSocialMedia = async (req, res) => {
   try {
-    const socialMedia = await SocialMedia.find();
+    const { page, limit } = req.query;
+    const options = {
+        page: parseInt(page, 10) || 1,
+        limit: parseInt(limit, 10) || 10,
+    };
+    const socialMedia = await SocialMedia.paginate({}, options);
     res.status(200).json(socialMedia);
   } catch (error) {
     res.status(500).json({ message: error.message });

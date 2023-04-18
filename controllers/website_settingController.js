@@ -3,7 +3,12 @@ import WebsiteSetting from "../models/website_settingModel.js";
 // Get all website setting
 export const getAllWebsiteSetting = async (req, res) => {
   try {
-    const websiteSetting = await WebsiteSetting.find();
+    const { page, limit } = req.query;
+    const options = {
+        page: parseInt(page, 10) || 1,
+        limit: parseInt(limit, 10) || 10,
+    };
+    const websiteSetting = await WebsiteSetting.paginate({}, options);
     res.status(200).json(websiteSetting);
   } catch (error) {
     res.status(500).json({ message: error.message });
