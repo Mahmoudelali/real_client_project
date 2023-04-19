@@ -3,8 +3,13 @@ import Profit from "../models/profitModel.js";
 // Get all profits
 export const getAllProfit = async (req, res) => {
   try {
-    const profit = await Profit.find();
-    res.status(200).json(profit);
+    const { page, limit } = req.query;
+    const options = {
+        page: parseInt(page, 10) || 1,
+        limit: parseInt(limit, 10) || 10,
+    };
+    const profits = await Profit.paginate({}, options);
+    res.status(200).json(profits);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

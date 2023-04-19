@@ -1,15 +1,22 @@
+import { response } from "express";
 import subCategory from "../models/sub_categoryModel.js";
 
 // get all the subCatego
 
 export const getAllsubCategory = async (req, res) => {
   try {
-    const subcategories = await subCategory.find();
-    res.status(200).json(subcategories);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+    const { page, limit } = req.query;
+        const options = {
+            page: parseInt(page, 10) || 1,
+            limit: parseInt(limit, 10) || 10,
+        };
+        await subCategory.paginate({}, options)
+            .then((response) => res.status(200).json({ success: true, response }))
+            .catch((err) => res.status(404).json({ success: false, err }));
+    } catch (err) {
+        return next(err);
+    }
+}
 
 // to add a subCatego
 

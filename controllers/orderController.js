@@ -3,7 +3,12 @@ import Order from "../models/orderModel.js";
 // Get all orders
 export const getAllOrders = async (req, res) => {
   try {
-    const orders = await Order.find();
+    const { page, limit } = req.query;
+    const options = {
+        page: parseInt(page, 10) || 1,
+        limit: parseInt(limit, 10) || 10,
+    };
+    const orders = await Order.paginate({}, options);
     res.status(200).json(orders);
   } catch (error) {
     res.status(500).json({ message: error.message });
