@@ -3,16 +3,17 @@ import Category from "../models/categoryModel.js";
 // To get all the category
 export const getAllCategory = async (req, res) => {
   try {
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
-    const skip = (page - 1) * limit;
-    const count = await Category.countDocuments();
-    const totalPages = Math.ceil(count / limit);
-    const categories = await Category.find().skip(skip).limit(limit);
-    res.status(200).json({ categories, totalPages, currentPage: page });
-    } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+    const {page, limit}= req.query;
+    const options ={
+      page: parseInt(page, 10) || 1,
+      limit: parseInt(limit, 10) || 10, 
+    };
+    await Category.paginate({}, options)
+            .then((response) => res.status(200).json({ success: true, response }))
+            .catch((err) => res.status(404).json({ success: false, err }));
+    } catch (err) {
+        return next(err);
+    }
 };
 
 // to add a category
