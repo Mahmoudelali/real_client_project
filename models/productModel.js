@@ -16,7 +16,7 @@ const ProductSchema = new Schema({
 	},
 	images: [
 		{
-			type: Object,
+			type: String
 		},
 	],
 	price: {
@@ -27,6 +27,12 @@ const ProductSchema = new Schema({
 	},
 	state: {
 		type: String,
+		enum: [~
+			"pending",
+			"accepted",
+			"rejected",
+		  ],
+		  default: "pending",
 	},
 	is_available: {
 		type: Boolean,
