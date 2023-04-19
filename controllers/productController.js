@@ -5,11 +5,14 @@ class product_controllers {
 	addProduct(req, res) {
 		try {
 			ProductModel.create(req.body).then((product) => {
-				console.log(product);
-				res.status(200).json({
-					message: 'Product added successfully',
-					product,
-				});
+				res.status(200)
+					.json({
+						message: 'Product added successfully',
+						product,
+					})
+					.catch((error) => {
+						console.log(error.message);
+					});
 			});
 		} catch (error) {
 			console.log(error.message);
