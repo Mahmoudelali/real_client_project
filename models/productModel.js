@@ -1,9 +1,9 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model } from "mongoose";
 
 const ProductSchema = new Schema({
 	user_id: {
 		type: Schema.Types.ObjectId,
-		ref: 'User',
+		ref: "User",
 		required: true,
 	},
 	title: {
@@ -14,11 +14,10 @@ const ProductSchema = new Schema({
 		type: String,
 		required: true,
 	},
-	images: [
-		{
-			type: String
-		},
-	],
+	image: {
+		type: String,
+		trim: true,
+	},
 	price: {
 		type: Number,
 	},
@@ -27,26 +26,22 @@ const ProductSchema = new Schema({
 	},
 	state: {
 		type: String,
-		enum: [~
-			"pending",
-			"accepted",
-			"rejected",
-		  ],
-		  default: "pending",
+		enum: ["pending", "accepted", "rejected"],
+		default: "pending",
 	},
 	is_available: {
 		type: Boolean,
 	},
 	review: {
 		type: String,
-		default: '',
+		default: "",
 	},
 	sub_category_id: {
 		type: Schema.Types.ObjectId,
-		ref: 'SubCategory',
+		ref: "SubCategory",
 	},
 });
-ProductSchema.pre(['find', 'findOne', 'create', 'save'], function () {
-	this.populate(['sub_category_id', 'user_id']);
+ProductSchema.pre(["find", "findOne", "create", "save"], function () {
+	this.populate(["sub_category_id", "user_id"]);
 });
-export default model('Product', ProductSchema);
+export default model("Product", ProductSchema);

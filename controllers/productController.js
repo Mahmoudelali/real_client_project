@@ -1,13 +1,18 @@
-import ProductModel from '../models/productModel.js';
+import ProductModel from "../models/productModel.js";
 
 class product_controllers {
 	// add product
-	addProduct(req, res) {
+	async addProduct(req, res) {
 		try {
-			ProductModel.create(req.body).then((product) => {
-				res.status(200)
+			let doc = new ProductModel(req.body);
+			if (req.file) {
+				doc.image = req.file.path;
+			}
+			await ProductModel.create(doc).then((product) => {
+				res
+					.status(200)
 					.json({
-						message: 'Product added successfully',
+						message: "Product added successfully",
 						product,
 					})
 					.catch((error) => {
@@ -30,12 +35,12 @@ class product_controllers {
 				console.log(product);
 				if (product) {
 					res.status(200).json({
-						message: 'Product updated successfully',
+						message: "Product updated successfully",
 						product,
 					});
 				} else {
 					res.status(404).json({
-						message: 'Product not found',
+						message: "Product not found",
 					});
 				}
 			});
@@ -49,7 +54,7 @@ class product_controllers {
 			ProductModel.find().then((products) => {
 				console.log(products);
 				res.status(200).json({
-					message: 'Products fetched successfully',
+					message: "Products fetched successfully",
 					products,
 				});
 			});
@@ -67,12 +72,12 @@ class product_controllers {
 				console.log(product);
 				if (product) {
 					res.status(200).json({
-						message: 'Product fetched successfully',
+						message: "Product fetched successfully",
 						product,
 					});
 				} else {
 					res.status(404).json({
-						message: 'Product not found',
+						message: "Product not found",
 					});
 				}
 			});
@@ -90,12 +95,12 @@ class product_controllers {
 				console.log(product);
 				if (product) {
 					res.status(200).json({
-						message: 'Product deleted successfully',
+						message: "Product deleted successfully",
 						product,
 					});
 				} else {
 					res.status(404).json({
-						message: 'Product not found',
+						message: "Product not found",
 					});
 				}
 			});
