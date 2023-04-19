@@ -1,3 +1,4 @@
+
 import express from "express";
 import dotenv from "dotenv";
 import morgan from "morgan";
@@ -14,13 +15,15 @@ import productRouter from "./routes/productRouter.js";
 import websiteSettingRouter from "./routes/website_settingRouter.js";
 import instructionRouter from "./routes/instructionRouter.js";
 
+
 dotenv.config();
 
 connectToDatabase();
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 const app = new express();
+
 
 if (process.env.NODE_ENV === "development") {
 	app.use(morgan("dev"));
@@ -35,6 +38,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/uploads", express.static("uploads"));
+
 
 app.listen(
 	PORT,
@@ -53,3 +57,4 @@ app.use("/websitesetting", websiteSettingRouter);
 app.use("/category", categoryRouter);
 app.use("/subcategory", subCategoryRouter);
 app.use("/instruction", instructionRouter);
+

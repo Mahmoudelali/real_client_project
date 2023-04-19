@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 
 const ProductSchema = new Schema({
-	userId: {
+	user_id: {
 		type: Schema.Types.ObjectId,
 		ref: 'User',
 		required: true,
@@ -16,7 +16,7 @@ const ProductSchema = new Schema({
 	},
 	images: [
 		{
-			typeof: Object,
+			type: Object,
 		},
 	],
 	price: {
@@ -40,5 +40,7 @@ const ProductSchema = new Schema({
 		ref: 'SubCategory',
 	},
 });
-
+ProductSchema.pre(['find', 'findOne', 'create', 'save'], function () {
+	this.populate(['sub_category_id', 'user_id']);
+});
 export default model('Product', ProductSchema);
