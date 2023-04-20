@@ -5,8 +5,8 @@ export const getAllWebsiteSetting = async (req, res) => {
   try {
     const { page, limit } = req.query;
     const options = {
-        page: parseInt(page, 10) || 1,
-        limit: parseInt(limit, 10) || 10,
+      page: parseInt(page, 10) || 1,
+      limit: parseInt(limit, 10) || 10,
     };
     const websiteSetting = await WebsiteSetting.paginate({}, options);
     res.status(200).json(websiteSetting);

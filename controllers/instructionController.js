@@ -1,12 +1,12 @@
-import Instruction from "../models/instructionModel.js"
+import Instruction from "../models/instructionModel.js";
 
 // Get all instructions
 export const getAllInstruction = async (req, res) => {
   try {
     const { page, limit } = req.query;
     const options = {
-        page: parseInt(page, 10) || 1,
-        limit: parseInt(limit, 10) || 10,
+      page: parseInt(page, 10) || 1,
+      limit: parseInt(limit, 10) || 10,
     };
     const instructions = await Instruction.paginate({}, options);
     res.status(200).json(instructions);
@@ -30,7 +30,7 @@ export const createInstruction = async (req, res) => {
 // Get a single instruction by ID
 export const getInstructionById = async (req, res) => {
   try {
-    const instruction= await Instruction.findById(req.params.instructionId);
+    const instruction = await Instruction.findById(req.params.instructionId);
     if (!instruction) {
       return res.status(404).json({ message: "Instruction not found" });
     }
@@ -64,9 +64,7 @@ export const deleteInstruction = async (req, res) => {
     if (!instruction) {
       return res.status(404).json({ message: "Instruction not found" });
     }
-    res
-      .status(200)
-      .json({ message: "Instruction deleted successfully" });
+    res.status(200).json({ message: "Instruction deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

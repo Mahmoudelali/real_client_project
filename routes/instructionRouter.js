@@ -5,7 +5,7 @@ import {
   getInstructionById,
   updateInstruction,
   deleteInstruction,
-} from "../controllers/instructionController.js"
+} from "../controllers/instructionController.js";
 
 const router = express.Router();
 

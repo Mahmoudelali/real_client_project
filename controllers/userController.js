@@ -85,7 +85,7 @@ export async function register(req, res, next) {
                         { expiresIn: "5h" }
                     );
                     response.password = undefined;
-                    res.cookie("auth_token", token, { maxAge: 5 * 60 * 60 * 1000 });
+                    // res.cookie("auth_token", token, { maxAge: 5 * 60 * 60 * 1000 });
                     res.status(200).json({ success: true, response, token });
                 }
             })
@@ -132,7 +132,7 @@ export async function addAdmin(req, res, next) {
                         { expiresIn: "5h" }
                     );
                     response.password = undefined;
-                    res.cookie("auth_token", token, { maxAge: 5 * 60 * 60 * 1000 });
+                    // res.cookie("auth_token", token, { maxAge: 5 * 60 * 60 * 1000 });
                     res.status(200).json({ success: true, response, token });
                 }
             })
@@ -179,7 +179,7 @@ export async function addSuperAdmin(req, res, next) {
                         { expiresIn: "5h" }
                     );
                     response.password = undefined;
-                    res.cookie("auth_token", token, { maxAge: 5 * 60 * 60 * 1000 });
+                    // res.cookie("auth_token", token, { maxAge: 5 * 60 * 60 * 1000 });
                     res.status(200).json({ success: true, response, token });
                 }
             })
@@ -221,7 +221,7 @@ export async function login(req, res, next) {
                         { expiresIn: "5h" }
                     );
                     response.password = undefined;
-                    res.cookie("auth_token", token, { maxAge: 5 * 60 * 60 * 1000 });
+                    // res.cookie("auth_token", token, { maxAge: 5 * 60 * 60 * 1000 });
                     res.status(200).json({ sucess: true, response, token });
                 } else {
                     res.status(400).json({ sucess: false, err: "Invalid Credentials" });
@@ -269,8 +269,8 @@ export async function del(req, res, next) {
 
 // check if the user has a token and is logged in
 export function isLoggedIn(req, res, next) {
-    // let token = req.headers["auth_token"];
-    let token = req.cookies["auth_token"];
+    let token = req.headers["auth_token"];
+    // let token = req.cookies["auth_token"];
     if (!token) {
         return res.status(403).json({ success: false, message: "no" });
     } else {

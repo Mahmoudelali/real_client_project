@@ -13,7 +13,7 @@ const websiteSettingSchema = new Schema(
     collection: "WebsiteSetting",
   }
 );
-websiteSettingSchema .plugin(mongoosePaginate);
+websiteSettingSchema.plugin(mongoosePaginate);
 
 const websiteSettingModel = model("WebsiteSetting", websiteSettingSchema);
 websiteSettingModel.paginate().then({});

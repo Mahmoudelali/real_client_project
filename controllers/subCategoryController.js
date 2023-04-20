@@ -6,17 +6,18 @@ import subCategory from "../models/subCategoryModel.js";
 export const getAllsubCategory = async (req, res) => {
   try {
     const { page, limit } = req.query;
-        const options = {
-            page: parseInt(page, 10) || 1,
-            limit: parseInt(limit, 10) || 10,
-        };
-        await subCategory.paginate({}, options)
-            .then((response) => res.status(200).json({ success: true, response }))
-            .catch((err) => res.status(404).json({ success: false, err }));
-    } catch (err) {
-        return next(err);
-    }
-}
+    const options = {
+      page: parseInt(page, 10) || 1,
+      limit: parseInt(limit, 10) || 10,
+    };
+    await subCategory
+      .paginate({}, options)
+      .then((response) => res.status(200).json({ success: true, response }))
+      .catch((err) => res.status(404).json({ success: false, err }));
+  } catch (err) {
+    return next(err);
+  }
+};
 
 // to add a subCatego
 
