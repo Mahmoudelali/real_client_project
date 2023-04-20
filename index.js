@@ -7,12 +7,12 @@ import cors from "cors";
 import connectToDatabase from "./dataBase/dataBase.js";
 import userRouter from "./routes/userRouter.js";
 import orderRouter from "./routes/orderRouter.js";
-import social_mediaRouter from "./routes/social_mediaRouter.js";
+import socialMediaRouter from "./routes/socialMediaRouter.js";
 import profitRouter from "./routes/profitRouter.js";
 import categoryRouter from "./routes/categoryRouter.js";
-import subCategoryRouter from "./routes/sub_categoryRouter.js";
+import subCategoryRouter from "./routes/subCategoryRouter.js";
 import productRouter from "./routes/productRouter.js";
-import websiteSettingRouter from "./routes/website_settingRouter.js";
+import websiteSettingRouter from "./routes/websiteSettingRouter.js";
 import instructionRouter from "./routes/instructionRouter.js";
 
 
@@ -51,7 +51,7 @@ app.get("/", (req, res) => {
 app.use("/user", userRouter);
 app.use("/order", orderRouter);
 app.use("/products", productRouter);
-app.use("/socialmedia", social_mediaRouter);
+app.use("/socialmedia", socialMediaRouter);
 app.use("/profit", profitRouter);
 app.use("/websitesetting", websiteSettingRouter);
 app.use("/category", categoryRouter);

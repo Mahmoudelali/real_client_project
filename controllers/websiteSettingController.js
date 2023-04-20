@@ -1,4 +1,4 @@
-import WebsiteSetting from "../models/website_settingModel.js";
+import WebsiteSetting from "../models/websiteSettingModel.js";
 
 // Get all website setting
 export const getAllWebsiteSetting = async (req, res) => {

@@ -5,7 +5,7 @@ import {
   getSocialMediaById,
   updateSocialMedia,
   deleteSocialMedia,
-} from "../controllers/social_mediaController.js";
+} from "../controllers/socialMediaController.js";
 
 const router = express.Router();
 

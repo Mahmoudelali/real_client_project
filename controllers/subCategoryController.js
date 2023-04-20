@@ -1,5 +1,5 @@
 import { response } from "express";
-import subCategory from "../models/sub_categoryModel.js";
+import subCategory from "../models/subCategoryModel.js";
 
 // get all the subCatego
 

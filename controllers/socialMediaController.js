@@ -1,4 +1,4 @@
-import SocialMedia from "../models/social_mediaModel.js";
+import SocialMedia from "../models/socialMediaModel.js";
 
 // Get all social media entries
 export const getAllSocialMedia = async (req, res) => {
