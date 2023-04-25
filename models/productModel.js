@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 
 const ProductSchema = new Schema({
 	user_id: {
@@ -41,7 +42,11 @@ const ProductSchema = new Schema({
 		ref: "SubCategory",
 	},
 });
+ProductSchema.plugin(mongoosePaginate);
+
 ProductSchema.pre(["find", "findOne", "create", "save"], function () {
 	this.populate(["sub_category_id", "user_id"]);
 });
+const productModel = model("Product", ProductSchema);
+productModel.paginate().then({});
 export default model("Product", ProductSchema);

@@ -42,22 +42,22 @@ class product_controllers {
 					res.status(404).json({
 						message: "Product not found",
 					});
-				}
+				}	
 			});
 		} catch (error) {
 			res.status(404).json({ error: error.message });
 		}
 	}
 	// get all products
-	getAllProducts(req, res) {
+	async getAllProducts (req, res) {
 		try {
-			ProductModel.find().then((products) => {
-				console.log(products);
-				res.status(200).json({
-					message: "Products fetched successfully",
-					products,
-				});
-			});
+			const { page, limit } = req.query;
+			const options = {
+			  page: parseInt(page, 10) || 1,
+			  limit: parseInt(limit, 10) || 10,
+			};
+			const products = await ProductModel.paginate({}, options);
+			res.status(200).json(products);
 		} catch (error) {
 			res.status(500).json({
 				message: error.message,
