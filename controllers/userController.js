@@ -80,7 +80,7 @@ export async function register(req, res, next) {
             .then((response) => {
                 if (response) {
                     const token = jwt.sign(
-                        { username, phone, email, role: doc.role },
+                        { user_id: response._id, username, phone, email, role: doc.role },
                         process.env.TOKEN_KEY,
                         { expiresIn: "5h" }
                     );
@@ -127,7 +127,7 @@ export async function addAdmin(req, res, next) {
             .then((response) => {
                 if (response) {
                     const token = jwt.sign(
-                        { username, phone, email, role: doc.role },
+                        { user_id: response._id, username, phone, email, role: doc.role },
                         process.env.TOKEN_KEY,
                         { expiresIn: "5h" }
                     );
@@ -174,7 +174,7 @@ export async function addSuperAdmin(req, res, next) {
             .then((response) => {
                 if (response) {
                     const token = jwt.sign(
-                        { username, phone, email, role: doc.role },
+                        { user_id: response._id, username, phone, email, role: doc.role },
                         process.env.TOKEN_KEY,
                         { expiresIn: "5h" }
                     );
@@ -212,6 +212,7 @@ export async function login(req, res, next) {
                 if (response && (await bcrypt.compare(password, response.password))) {
                     const token = jwt.sign(
                         {
+                            user_id: response._id,
                             username: response.username,
                             phone: response.phone,
                             email: response.email,
