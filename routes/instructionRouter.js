@@ -6,6 +6,7 @@ import {
   updateInstruction,
   deleteInstruction,
 } from "../controllers/instructionController.js";
+import { admin, verifyUser } from "../middleware/auth.js";
 
 const router = express.Router();
 
@@ -13,15 +14,15 @@ const router = express.Router();
 router.get("/", getAllInstruction);
 
 // POST /Instructions
-router.post("/", createInstruction);
+router.post("/", verifyUser, admin, createInstruction);
 
 // GET /Instructions/:InstructionId
 router.get("/:instructionId", getInstructionById);
 
 // PUT /Instructions/:InstructionId
-router.put("/:instructionId", updateInstruction);
+router.put("/:instructionId", verifyUser, admin, updateInstruction);
 
 // DELETE /Instructions/:InstructionId
-router.delete("/:instructionId", deleteInstruction);
+router.delete("/:instructionId", verifyUser, admin, deleteInstruction);
 
 export default router;

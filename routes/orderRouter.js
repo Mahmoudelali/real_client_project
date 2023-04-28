@@ -6,22 +6,23 @@ import {
   updateOrder,
   deleteOrder,
 } from "../controllers/orderController.js";
+import { admin, verifyUser } from "../middleware/auth.js";
 
 const router = express.Router();
 
 // GET /orders
-router.get("/", getAllOrders);
+router.get("/", verifyUser, admin, getAllOrders);
 
 // POST /orders
-router.post("/", createOrder);
+router.post("/", verifyUser, createOrder);
 
 // GET /orders/:orderId
-router.get("/:orderId", getOrderById);
+router.get("/:orderId", verifyUser, getOrderById);
 
 // PUT /orders/:orderId
-router.put("/:orderId", updateOrder);
+router.put("/:orderId", verifyUser, updateOrder);
 
 // DELETE /orders/:orderId
-router.delete("/:orderId", deleteOrder);
+router.delete("/:orderId", verifyUser, deleteOrder);
 
 export default router;
