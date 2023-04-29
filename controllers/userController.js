@@ -40,13 +40,14 @@ export async function get(req, res, next) {
     try {
         let { id } = req.params;
         await Model.findOne({ _id: id })
-            .then((response) =>
+            .then((response) => {
+                response.password = undefined;
                 res.status(200).json({
                     success: true,
                     response,
                     imagePath: `http://localhost:${process.env.PORT}/${response.image}`,
-                })
-            )
+                });
+            })
             .catch((err) =>
                 res.status(404).json({ success: false, message: "user not found", err })
             );
@@ -208,7 +209,6 @@ export async function login(req, res, next) {
         }
         await Model.findOne({ $or: [{ phone }, { email }] }).then(
             async (response) => {
-                console.log(response);
                 if (response && (await bcrypt.compare(password, response.password))) {
                     const token = jwt.sign(
                         {
