@@ -1,10 +1,10 @@
-import { Schema, model } from "mongoose";
-import mongoosePaginate from "mongoose-paginate-v2";
+import { Schema, model } from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate-v2';
 
 const ProductSchema = new Schema({
 	user_id: {
 		type: Schema.Types.ObjectId,
-		ref: "User",
+		ref: 'User',
 		required: true,
 	},
 	title: {
@@ -27,26 +27,30 @@ const ProductSchema = new Schema({
 	},
 	state: {
 		type: String,
-		enum: ["pending", "accepted", "rejected"],
-		default: "pending",
+		enum: ['pending', 'accepted', 'rejected'],
+		default: 'pending',
 	},
 	is_available: {
 		type: Boolean,
 	},
 	review: {
 		type: String,
-		default: "",
+		default: '',
 	},
 	sub_category_id: {
 		type: Schema.Types.ObjectId,
-		ref: "SubCategory",
+		ref: 'SubCategory',
+	},
+	onPage: {
+		type: Boolean,
+		required: true,
 	},
 });
 ProductSchema.plugin(mongoosePaginate);
 
-ProductSchema.pre(["find", "findOne", "create", "save"], function () {
-	this.populate(["sub_category_id", "user_id"]);
+ProductSchema.pre(['find', 'findOne', 'create', 'save'], function () {
+	this.populate(['sub_category_id', 'user_id']);
 });
-const productModel = model("Product", ProductSchema);
+const productModel = model('Product', ProductSchema);
 productModel.paginate().then({});
-export default model("Product", ProductSchema);
+export default model('Product', ProductSchema);
