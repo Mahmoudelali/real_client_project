@@ -58,6 +58,18 @@ class product_controllers {
 			});
 		}
 	}
+	// get user products
+	async getUserProducts(req, res) {
+		try {
+			let user_id = req.body.user_id;
+			const products = await ProductModel.find({ user_id });
+			res.status(200).json(products);
+		} catch (error) {
+			res.status(500).json({
+				message: error.message,
+			});
+		}
+	}
 	// get single product
 	getSingleProduct(req, res) {
 		try {

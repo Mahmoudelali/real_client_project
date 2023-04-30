@@ -10,6 +10,8 @@ import { admin, verifyUser } from "../middleware/auth.js";
 router.get("/", productController.getAllProducts);
 // get One Product
 router.get("/:id", productController.getSingleProduct);
+// get user products
+router.post("/user-product", verifyUser, productController.getUserProducts);
 // Add one product
 router.post("/create", verifyUser, upload, productController.addProduct);
 // edit one product
