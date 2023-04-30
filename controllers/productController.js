@@ -8,16 +8,10 @@ class product_controllers {
 			if (req.file) {
 				doc.image = req.file.path;
 			}
-			await ProductModel.create(doc).then((product) => {
-				res
-					.status(200)
-					.json({
-						message: "Product added successfully",
-						product,
-					})
-					.catch((error) => {
-						console.log(error.message);
-					});
+			let product = await ProductModel.create(doc);
+			res.status(200).json({
+				message: "Product added successfully",
+				product,
 			});
 		} catch (error) {
 			console.log(error.message);
@@ -42,19 +36,19 @@ class product_controllers {
 					res.status(404).json({
 						message: "Product not found",
 					});
-				}	
+				}
 			});
 		} catch (error) {
 			res.status(404).json({ error: error.message });
 		}
 	}
 	// get all products
-	async getAllProducts (req, res) {
+	async getAllProducts(req, res) {
 		try {
 			const { page, limit } = req.query;
 			const options = {
-			  page: parseInt(page, 10) || 1,
-			  limit: parseInt(limit, 10) || 10,
+				page: parseInt(page, 10) || 1,
+				limit: parseInt(limit, 10) || 10,
 			};
 			const products = await ProductModel.paginate({}, options);
 			res.status(200).json(products);

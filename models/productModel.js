@@ -41,6 +41,14 @@ const ProductSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: "SubCategory",
 	},
+	category_id: {
+		type: Schema.Types.ObjectId,
+		ref: "Category",
+		virtual: true,
+		get: function () {
+			return this.sub_category_id.category_id;
+		},
+	},
 });
 ProductSchema.plugin(mongoosePaginate);
 
