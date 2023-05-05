@@ -1,27 +1,27 @@
-import express from "express";
+import express from 'express';
 import {
-  getAllSocialMedia,
-  createSocialMedia,
-  getSocialMediaById,
-  updateSocialMedia,
-  deleteSocialMedia,
-} from "../controllers/socialMediaController.js";
+	getAllSocialMedia,
+	createSocialMedia,
+	getSocialMediaById,
+	updateSocialMedia,
+	deleteSocialMedia,
+} from '../controllers/socialMediaController.js';
 
 const router = express.Router();
 
 // GET /socialmedia
-router.get("/", getAllSocialMedia);
+router.get('/', getAllSocialMedia);
 
-// POST /socialmedia
-router.post("/", createSocialMedia);
+// // POST /socialmedia
+// router.post("/", createSocialMedia);
 
 // GET /socialmedia/:socialMediaId
-router.get("/:socialMediaId", getSocialMediaById);
+router.get('/:socialMediaId', getSocialMediaById);
 
 // PUT /socialmedia/:socialMediaId
-router.put("/:socialMediaId", updateSocialMedia);
+router.put('/:socialMediaId', updateSocialMedia);
 
 // DELETE /socialmedia/:socialMediaId
-router.delete("/:socialMediaId", deleteSocialMedia);
+router.delete('/:socialMediaId', deleteSocialMedia);
 
 export default router;

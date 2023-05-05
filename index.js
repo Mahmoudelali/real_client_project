@@ -13,6 +13,7 @@ import subCategoryRouter from "./routes/subCategoryRouter.js";
 import productRouter from "./routes/productRouter.js";
 import websiteSettingRouter from "./routes/websiteSettingRouter.js";
 import instructionRouter from "./routes/instructionRouter.js";
+import messageRouter from "./routes/messageRouter.js";
 
 dotenv.config();
 
@@ -53,3 +54,4 @@ app.use("/websitesetting", websiteSettingRouter);
 app.use("/category", categoryRouter);
 app.use("/subcategory", subCategoryRouter);
 app.use("/instruction", instructionRouter);
+app.use("/message" , messageRouter);
