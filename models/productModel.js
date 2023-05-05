@@ -58,7 +58,7 @@ const ProductSchema = new Schema({
 ProductSchema.plugin(mongoosePaginate);
 
 ProductSchema.pre(["find", "findOne", "create", "save"], function () {
-	this.populate(["sub_category_id","category_id", "user_id"]);
+	this.populate(["sub_category_id", "category_id", "user_id"]);
 });
 const productModel = model("Product", ProductSchema);
 productModel.paginate().then({});
