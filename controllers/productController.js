@@ -58,6 +58,23 @@ class product_controllers {
 			});
 		}
 	}
+	// get all products
+	async getProductByCategory(req, res) {
+		try {
+			const { page, limit } = req.query;
+			const { id}= req.params
+			const options = {
+				page: parseInt(page, 10) || 1,
+				limit: parseInt(limit, 10) || 10,
+			};
+			const products = await ProductModel.paginate({category_id:id}, options);
+			res.status(200).json(products);
+		} catch (error) {
+			res.status(500).json({
+				message: error.message,
+			});
+		}
+	}
 	// get user products
 	async getUserProducts(req, res) {
 		try {
