@@ -62,13 +62,13 @@ class product_controllers {
 	async getProductByCategory(req, res) {
 		try {
 			const { page, limit } = req.query;
-			const { id } = req.params;
+			const { categoryId } = req.params;
 			const options = {
 				page: parseInt(page, 10) || 1,
 				limit: parseInt(limit, 10) || 10,
 			};
 			const products = await ProductModel.paginate(
-				{ category_id: id },
+				{ category_id: categoryId },
 				options
 			);
 			res.status(200).json(products);
