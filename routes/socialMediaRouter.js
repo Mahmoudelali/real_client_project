@@ -19,7 +19,7 @@ router.get('/', getAllSocialMedia);
 router.get('/:socialMediaId', getSocialMediaById);
 
 // PUT /socialmedia/:socialMediaId
-router.put('/:socialMediaId', updateSocialMedia);
+router.put('/', updateSocialMedia);
 
 // DELETE /socialmedia/:socialMediaId
 router.delete('/:socialMediaId', deleteSocialMedia);
