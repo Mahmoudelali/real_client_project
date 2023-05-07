@@ -1,28 +1,28 @@
-import express from "express";
+import express from 'express';
 import {
-  getAllOrders,
-  createOrder,
-  getOrderById,
-  updateOrder,
-  deleteOrder,
-} from "../controllers/orderController.js";
-import { admin, verifyUser } from "../middleware/auth.js";
+	getAllOrders,
+	createOrder,
+	getOrderById,
+	updateOrder,
+	deleteOrder,
+} from '../controllers/orderController.js';
+import { admin, verifyUser } from '../middleware/auth.js';
 
 const router = express.Router();
 
 // GET /orders
-router.get("/", verifyUser, admin, getAllOrders);
+router.get('/', verifyUser, admin, getAllOrders);
 
 // POST /orders
-router.post("/", verifyUser, createOrder);
+router.post('/', createOrder);
 
 // GET /orders/:orderId
-router.get("/:orderId", verifyUser, getOrderById);
+router.get('/:orderId', verifyUser, getOrderById);
 
 // PUT /orders/:orderId
-router.put("/:orderId", verifyUser, updateOrder);
+router.put('/:orderId', verifyUser, updateOrder);
 
 // DELETE /orders/:orderId
-router.delete("/:orderId", verifyUser, deleteOrder);
+router.delete('/:orderId', verifyUser, deleteOrder);
 
 export default router;
